@@ -198,6 +198,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:24px 56px;justify-content:space-bet
 footer small{color:var(--muted)}
 .fab{position:fixed;bottom:18px;inset-inline-start:18px;z-index:30;border-radius:999px;padding:14px 18px;box-shadow:0 6px 20px rgba(16,35,56,.25)}
 @media (min-width:861px){.fab{display:none}}
+/* short intake form */
+.quick-form{background:var(--paper);color:var(--ink);border-radius:var(--radius-m);margin-top:28px;padding:32px 36px;max-width:860px}
+.drop.compact{display:flex;align-items:center;gap:14px;padding:14px 16px;text-align:start}
+details.more{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}
+details.more summary{font-size:16px}
+.qf-foot{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.consent input{width:20px;height:20px;margin-top:3px;flex:none;accent-color:var(--ink)}
+.btn-brass{background:var(--brass);color:#fff}
+.btn-brass:hover{background:#957340}
+.btn.big{padding:16px 34px;font-size:18px}
+.qf-foot .saved{font-size:13px;color:var(--muted)}
+@media (max-width:860px){.quick-form{padding:22px 16px}.btn.big{width:100%;justify-content:center}}
 </style>
 </head>
 <body>
@@ -303,212 +316,97 @@ footer small{color:var(--muted)}
   </div>
 </section>
 
-<!-- ================= INTAKE FORM ================= -->
 <section class="intake" id="intake" aria-labelledby="intakeTitle">
   <div class="wrap">
     <h2 id="intakeTitle">פתיחת תיק שמאות</h2>
-    <p class="lede">שישה שלבים קצרים. מה שלא ידוע עכשיו אפשר להשאיר ריק ולהשלים מול המשרד. הטיוטה נשמרת בדפדפן שלכם עד השליחה.</p>
+    <p class="lede">4 פרטים ותמונות, וזה הכל. את השאר משלימים מול המשרד.</p>
 
-    <form class="formbox" id="intakeForm" novalidate>
-      <ol class="stepper" id="stepper"></ol>
-
-      <!-- step 1 -->
-      <div class="panel" data-title="הפנייה והאירוע">
-        <h3>הפנייה והאירוע</h3>
-        <p class="sub">מי פונה, ומה קרה לרכב.</p>
-        <div class="fields">
-          <fieldset class="f full">
-            <legend>מי ממלא את הטופס</legend>
-            <div class="choices" role="radiogroup">
-              <label class="choice"><input type="radio" name="sender_role" value="מבוטח" checked><span>בעל/ת הרכב או המבוטח/ת</span></label>
-              <label class="choice"><input type="radio" name="sender_role" value="מוסך"><span>מוסך</span></label>
-              <label class="choice"><input type="radio" name="sender_role" value="סוכן ביטוח"><span>סוכן ביטוח</span></label>
-              <label class="choice"><input type="radio" name="sender_role" value="חברת ביטוח"><span>חברת ביטוח</span></label>
-            </div>
-          </fieldset>
-          <fieldset class="f full">
-            <legend>סוג התיק</legend>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="case_type" value="נזק עצמי (מקיף)" checked><span>נזק לרכב שלי (מקיף)</span></label>
-              <label class="choice"><input type="radio" name="case_type" value="צד ג'"><span>תביעת צד ג'</span></label>
-              <label class="choice"><input type="radio" name="case_type" value="חוות דעת פרטית"><span>חוות דעת פרטית</span></label>
-              <label class="choice"><input type="radio" name="case_type" value="גניבה"><span>גניבה</span></label>
-              <label class="choice"><input type="radio" name="case_type" value="ירידת ערך"><span>ירידת ערך</span></label>
-            </div>
-          </fieldset>
-          <div class="f"><label for="damage_date">תאריך האירוע</label><input type="date" id="damage_date" name="damage_date" required><div class="msg"></div></div>
-          <div class="f"><label for="event_place">מקום האירוע <span class="opt">(רשות)</span></label><input id="event_place" name="event_place" placeholder="עיר / כביש"></div>
-          <div class="f full"><label for="event_description">מה קרה</label><textarea id="event_description" name="event_description" required placeholder="למשל: רכב פגע בי מאחור ברמזור, הנזק בפגוש האחורי ובתא המטען"></textarea><div class="msg"></div></div>
-          <fieldset class="f full">
-            <legend>האם הרכב נוסע?</legend>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="drivable" value="כן" checked><span>כן</span></label>
-              <label class="choice"><input type="radio" name="drivable" value="לא, נגרר"><span>לא, נגרר</span></label>
-              <label class="choice"><input type="radio" name="drivable" value="לא ידוע"><span>לא בטוח</span></label>
-            </div>
-          </fieldset>
-        </div>
-      </div>
-
-      <!-- step 2 -->
-      <div class="panel" data-title="הרכב והנזק">
-        <h3>הרכב והנזק</h3>
-        <p class="sub">סמנו על הרכב את האזורים שנפגעו.</p>
+    <form class="quick-form" id="intakeForm" novalidate>
+      <div class="qf-body" id="qfBody">
         <div class="fields">
           <div class="f"><label for="plate">מספר רישוי</label><input id="plate" name="plate" inputmode="numeric" required dir="ltr" style="text-align:right" placeholder="12-345-67"><div class="msg"></div></div>
-          <div class="f"><label for="manufacturer">יצרן ודגם <span class="opt">(רשות)</span></label><input id="manufacturer" name="vehicle_model" placeholder="למשל: טויוטה קורולה"></div>
-          <div class="f"><label for="year">שנת ייצור <span class="opt">(רשות)</span></label><input id="year" name="vehicle_year" inputmode="numeric" maxlength="4"></div>
-          <div class="f"><label for="km">קילומטראז' <span class="opt">(רשות)</span></label><input id="km" name="odometer" inputmode="numeric"></div>
-          <div class="f full">
-            <label id="damageLabel">אזורי הנזק</label>
-            <div class="damage">
-              <svg class="carmap" viewBox="0 0 220 420" role="group" aria-labelledby="damageLabel">
-                <!-- top-down car, front at top -->
-                <path class="zone" data-zone="פגוש קדמי" d="M50 18 Q110 0 170 18 L176 48 L44 48 Z"/>
-                <path class="zone" data-zone="מכסה מנוע" d="M44 52 L176 52 L170 122 L50 122 Z"/>
-                <path class="zone glass" data-zone="שמשה קדמית" d="M54 126 L166 126 L156 160 L64 160 Z"/>
-                <path class="zone" data-zone="גג" d="M64 164 L156 164 L156 262 L64 262 Z"/>
-                <path class="zone glass" data-zone="שמשה אחורית" d="M64 266 L156 266 L164 296 L56 296 Z"/>
-                <path class="zone" data-zone="תא מטען" d="M52 300 L168 300 L174 368 L46 368 Z"/>
-                <path class="zone" data-zone="פגוש אחורי" d="M44 372 L176 372 L170 404 Q110 418 50 404 Z"/>
-                <!-- right side of car = left on screen when front is up? Car seen from above, front up: driver (left side of car) is on the screen's left -->
-                <path class="zone" data-zone="כנף קדמית שמאל" d="M14 50 L40 50 L46 122 L18 130 Z"/>
-                <path class="zone" data-zone="דלת קדמית שמאל" d="M18 134 L60 134 L60 210 L16 210 Z"/>
-                <path class="zone" data-zone="דלת אחורית שמאל" d="M16 214 L60 214 L60 290 L18 290 Z"/>
-                <path class="zone" data-zone="כנף אחורית שמאל" d="M18 294 L48 300 L42 370 L14 370 Z"/>
-                <path class="zone" data-zone="כנף קדמית ימין" d="M180 50 L206 50 L202 130 L174 122 Z"/>
-                <path class="zone" data-zone="דלת קדמית ימין" d="M160 134 L202 134 L204 210 L160 210 Z"/>
-                <path class="zone" data-zone="דלת אחורית ימין" d="M160 214 L204 214 L202 290 L160 290 Z"/>
-                <path class="zone" data-zone="כנף אחורית ימין" d="M172 300 L202 294 L206 370 L178 370 Z"/>
-                <text x="110" y="14" text-anchor="middle">חזית</text>
-              </svg>
-              <div>
-                <p class="sub" style="margin:0 0 8px">לחיצה על אזור מסמנת אותו, לחיצה נוספת מבטלת.</p>
-                <div class="zones" id="zonesList" aria-live="polite"><span class="empty">עוד לא סומן אזור.</span></div>
-                <div class="f" style="margin-top:16px"><label for="damage_notes">פירוט נוסף על הנזק <span class="opt">(רשות)</span></label><textarea id="damage_notes" name="damage_notes" placeholder="למשל: פנס אחורי שבור, נזילה מתחת לרכב"></textarea></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- step 3 -->
-      <div class="panel" data-title="מבוטח, נהג ובעל רכב">
-        <h3>מבוטח, נהג ובעל רכב</h3>
-        <p class="sub">הפרטים משמשים לפתיחת התיק ולקשר איתכם.</p>
-        <div class="fields">
-          <div class="f"><label for="insured_name">שם המבוטח</label><input id="insured_name" name="insured_name" required autocomplete="name"><div class="msg"></div></div>
-          <div class="f"><label for="insured_id">ת.ז. <span class="opt">(רשות)</span></label><input id="insured_id" name="insured_id" inputmode="numeric" maxlength="9"><div class="msg"></div></div>
+          <div class="f"><label for="damage_date">תאריך התאונה</label><input type="date" id="damage_date" name="damage_date" required><div class="msg"></div></div>
+          <div class="f"><label for="insured_name">שם מלא</label><input id="insured_name" name="insured_name" required autocomplete="name"><div class="msg"></div></div>
           <div class="f"><label for="insured_phone">טלפון</label><input id="insured_phone" name="insured_phone" type="tel" required autocomplete="tel" dir="ltr" style="text-align:right"><div class="msg"></div></div>
-          <div class="f"><label for="insured_email">מייל <span class="opt">(רשות)</span></label><input id="insured_email" name="insured_email" type="email" autocomplete="email" dir="ltr" style="text-align:right"><div class="msg"></div></div>
-          <div class="f"><label for="insured_street">רחוב ומספר <span class="opt">(רשות)</span></label><input id="insured_street" name="insured_street" autocomplete="street-address"></div>
-          <div class="f"><label for="insured_city">עיר <span class="opt">(רשות)</span></label><input id="insured_city" name="insured_city" autocomplete="address-level2"></div>
-
-          <div class="sect">הנהג בזמן האירוע <button type="button" class="copy" data-copy="driver">אותו אדם כמו המבוטח</button></div>
-          <div class="f"><label for="driver_name">שם הנהג <span class="opt">(רשות)</span></label><input id="driver_name" name="driver_name"></div>
-          <div class="f"><label for="driver_phone">טלפון הנהג <span class="opt">(רשות)</span></label><input id="driver_phone" name="driver_phone" type="tel" dir="ltr" style="text-align:right"></div>
-
-          <div class="sect">בעל הרכב <button type="button" class="copy" data-copy="owner">אותו אדם כמו המבוטח</button></div>
-          <div class="f"><label for="owner_name">שם בעל הרכב <span class="opt">(רשות)</span></label><input id="owner_name" name="owner_name"></div>
-          <div class="f"><label for="owner_phone">טלפון בעל הרכב <span class="opt">(רשות)</span></label><input id="owner_phone" name="owner_phone" type="tel" dir="ltr" style="text-align:right"></div>
-        </div>
-      </div>
-
-      <!-- step 4 -->
-      <div class="panel" data-title="ביטוח וצד ג'">
-        <h3>ביטוח וצד ג'</h3>
-        <p class="sub">אם עוד לא דיווחתם לחברת הביטוח, השאירו ריק.</p>
-        <div class="fields">
-          <div class="f"><label for="insurer">חברת הביטוח</label>
+          <div class="f"><label for="insurer">חברת הביטוח <span class="opt">(רשות)</span></label>
             <select id="insurer" name="insurer">
-              <option value="">בחרו</option>
+              <option value="">לא ידוע / אין</option>
               <option>הראל</option><option>מגדל</option><option>הפניקס</option><option>כלל</option><option>מנורה מבטחים</option>
               <option>איילון</option><option>ביטוח ישיר</option><option>AIG</option><option>הכשרה</option><option>ליברה</option>
-              <option>שומרה</option><option>9 מיליון</option><option>wobi / אחר</option><option>אין ביטוח / פרטי</option>
+              <option>שומרה</option><option>9 מיליון</option><option>אחרת</option>
             </select></div>
           <div class="f"><label for="claim_number">מספר תביעה <span class="opt">(רשות)</span></label><input id="claim_number" name="claim_number" dir="ltr" style="text-align:right"></div>
-          <div class="f"><label for="policy_number">מספר פוליסה <span class="opt">(רשות)</span></label><input id="policy_number" name="policy_number" dir="ltr" style="text-align:right"></div>
-          <div class="f"><label for="agent_name">סוכן ביטוח <span class="opt">(רשות)</span></label><input id="agent_name" name="agent_name"></div>
-
-          <fieldset class="f full">
-            <legend>היה מעורב רכב נוסף?</legend>
-            <div class="choices">
-              <label class="choice"><input type="radio" name="third_party" value="לא" checked><span>לא</span></label>
-              <label class="choice"><input type="radio" name="third_party" value="כן"><span>כן</span></label>
-            </div>
-          </fieldset>
-          <div class="tp fields full" hidden style="grid-column:1/-1">
-            <div class="f"><label for="tp_name">שם הנהג השני</label><input id="tp_name" name="third_party_name"></div>
-            <div class="f"><label for="tp_phone">טלפון</label><input id="tp_phone" name="third_party_phone" type="tel" dir="ltr" style="text-align:right"></div>
-            <div class="f"><label for="tp_plate">רישוי הרכב השני</label><input id="tp_plate" name="third_party_plate" inputmode="numeric" dir="ltr" style="text-align:right"></div>
-            <div class="f"><label for="tp_insurer">חברת הביטוח שלו</label><input id="tp_insurer" name="third_party_insurer"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- step 5 -->
-      <div class="panel" data-title="בדיקה ותמונות">
-        <h3>בדיקה ותמונות</h3>
-        <p class="sub">איפה הרכב, ומתי נוח לבדוק אותו.</p>
-        <div class="fields">
-          <div class="f"><label for="garage_name">מוסך <span class="opt">(רשות)</span></label><input id="garage_name" name="garage_name" placeholder="שם המוסך"></div>
-          <div class="f"><label for="garage_city">עיר המוסך / מקום הרכב <span class="opt">(רשות)</span></label><input id="garage_city" name="inspection_place"></div>
-          <fieldset class="f full">
-            <legend>מתי נוח לבדיקה</legend>
-            <div class="choices">
-              <label class="choice"><input type="checkbox" name="slots" value="בוקר"><span>בוקר</span></label>
-              <label class="choice"><input type="checkbox" name="slots" value="צהריים"><span>צהריים</span></label>
-              <label class="choice"><input type="checkbox" name="slots" value="אחר הצהריים"><span>אחר הצהריים</span></label>
-              <label class="choice"><input type="checkbox" name="slots" value="גמיש"><span>גמיש</span></label>
-            </div>
-          </fieldset>
+          <div class="f full"><label for="event_description">מה קרה <span class="opt">(רשות, משפט אחד מספיק)</span></label><input id="event_description" name="event_description" placeholder="למשל: פגעו בי מאחור ברמזור"></div>
           <div class="f full">
-            <label>תמונות הנזק</label>
-            <div class="drop" id="drop">
+            <label>תמונות של הנזק <span class="opt">(רשות, אפשר לשלוח גם בוואטסאפ)</span></label>
+            <div class="drop compact" id="drop">
               <input type="file" id="photos" accept="image/*" multiple>
-              <p style="margin:0 0 10px">גררו לכאן תמונות, או</p>
-              <button type="button" class="btn btn-line" id="pick">בחירת תמונות</button>
-              <p class="sub" style="margin:10px 0 0">כדאי לצרף תמונה של כל אזור פגוע, תמונה רחוקה של הרכב כולו ותמונה של הלוחית.</p>
+              <button type="button" class="btn btn-line" id="pick">צירוף תמונות</button>
+              <span class="sub" style="margin:0">או גררו לכאן</span>
             </div>
             <div class="thumbs" id="thumbs"></div>
           </div>
         </div>
-      </div>
 
-      <!-- step 6 -->
-      <div class="panel" data-title="סיכום ושליחה">
-        <h3>סיכום ושליחה</h3>
-        <p class="sub">בדקו שהפרטים נכונים. אפשר לחזור לכל שלב מהרשימה.</p>
-        <div class="summary" id="summary"></div>
-        <div class="f full" style="margin-top:20px">
-          <label class="choice" style="display:flex;gap:10px;align-items:flex-start">
-            <input type="checkbox" id="consent" required style="position:static;opacity:1;width:20px;height:20px;margin-top:3px">
-            <span style="border:0;padding:0;background:none;color:inherit">אני מאשר/ת למשרד להשתמש בפרטים ובתמונות לצורך הטיפול בתיק ולהעביר אותם לחברת הביטוח הרלוונטית.</span>
-          </label>
-          <div class="msg" id="consentMsg"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="donePanel" data-title="">
-        <div class="done-box">
-          <h3>הפרטים נקלטו</h3>
-          <p class="sub" style="margin:8px 0 0">מספר הפנייה שלכם:</p>
-          <div class="ref" id="refNo"></div>
-          <p>המשרד יחזור אליכם לתיאום בדיקה. אם יש עוד תמונות, שלחו אותן בוואטסאפ עם מספר הרישוי.</p>
-          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
-            <a class="btn btn-wa" id="waSend" target="_blank" rel="noopener">שליחת התמונות בוואטסאפ</a>
-            <a class="btn btn-line" id="mailSend">שליחת הפרטים במייל</a>
+        <details class="more">
+          <summary>עוד פרטים <span class="opt">(רשות: מקום הנזק ברכב, נהג, צד ג', מוסך)</span></summary>
+          <div class="fields" style="margin-top:16px">
+            <div class="f full">
+              <label id="damageLabel">איפה הנזק ברכב</label>
+              <div class="damage">
+                <svg class="carmap" viewBox="0 0 220 420" role="group" aria-labelledby="damageLabel">
+                  <path class="zone" data-zone="פגוש קדמי" d="M50 18 Q110 0 170 18 L176 48 L44 48 Z"/>
+                  <path class="zone" data-zone="מכסה מנוע" d="M44 52 L176 52 L170 122 L50 122 Z"/>
+                  <path class="zone glass" data-zone="שמשה קדמית" d="M54 126 L166 126 L156 160 L64 160 Z"/>
+                  <path class="zone" data-zone="גג" d="M64 164 L156 164 L156 262 L64 262 Z"/>
+                  <path class="zone glass" data-zone="שמשה אחורית" d="M64 266 L156 266 L164 296 L56 296 Z"/>
+                  <path class="zone" data-zone="תא מטען" d="M52 300 L168 300 L174 368 L46 368 Z"/>
+                  <path class="zone" data-zone="פגוש אחורי" d="M44 372 L176 372 L170 404 Q110 418 50 404 Z"/>
+                  <path class="zone" data-zone="כנף קדמית שמאל" d="M14 50 L40 50 L46 122 L18 130 Z"/>
+                  <path class="zone" data-zone="דלת קדמית שמאל" d="M18 134 L60 134 L60 210 L16 210 Z"/>
+                  <path class="zone" data-zone="דלת אחורית שמאל" d="M16 214 L60 214 L60 290 L18 290 Z"/>
+                  <path class="zone" data-zone="כנף אחורית שמאל" d="M18 294 L48 300 L42 370 L14 370 Z"/>
+                  <path class="zone" data-zone="כנף קדמית ימין" d="M180 50 L206 50 L202 130 L174 122 Z"/>
+                  <path class="zone" data-zone="דלת קדמית ימין" d="M160 134 L202 134 L204 210 L160 210 Z"/>
+                  <path class="zone" data-zone="דלת אחורית ימין" d="M160 214 L204 214 L202 290 L160 290 Z"/>
+                  <path class="zone" data-zone="כנף אחורית ימין" d="M172 300 L202 294 L206 370 L178 370 Z"/>
+                  <text x="110" y="14" text-anchor="middle">חזית</text>
+                </svg>
+                <div>
+                  <p class="sub" style="margin:0 0 8px">לחיצה על אזור מסמנת אותו.</p>
+                  <div class="zones" id="zonesList" aria-live="polite"><span class="empty">עוד לא סומן אזור.</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="f"><label for="driver_name">שם הנהג, אם לא אתם</label><input id="driver_name" name="driver_name"></div>
+            <div class="f"><label for="garage_name">מוסך</label><input id="garage_name" name="garage_name"></div>
+            <div class="f"><label for="policy_number">מספר פוליסה</label><input id="policy_number" name="policy_number" dir="ltr" style="text-align:right"></div>
+            <div class="f"><label for="insured_email">מייל</label><input id="insured_email" name="insured_email" type="email" dir="ltr" style="text-align:right"><div class="msg"></div></div>
+            <div class="f"><label for="tp_plate">רישוי הרכב השני <span class="opt">(אם היה)</span></label><input id="tp_plate" name="third_party_plate" inputmode="numeric" dir="ltr" style="text-align:right"></div>
+            <div class="f"><label for="tp_phone">טלפון הנהג השני</label><input id="tp_phone" name="third_party_phone" type="tel" dir="ltr" style="text-align:right"></div>
           </div>
-          <p class="demo">גרסת הדגמה: הטופס עוד לא מחובר לשרת. בגרסה הסופית הפרטים יגיעו ישירות למערכת של המשרד, ויפתחו תיק לפי מספר הרישוי.</p>
+        </details>
+
+        <div class="qf-foot">
+          <label class="consent"><input type="checkbox" id="consent"> <span>מאשר/ת שהמשרד ישתמש בפרטים לטיפול בתיק ויעביר אותם לחברת הביטוח.</span></label>
+          <div class="msg" id="consentMsg"></div>
+          <button type="submit" class="btn btn-brass big">שליחת הפרטים</button>
+          <span class="saved" id="savedNote"></span>
         </div>
+      </div>
+
+      <div class="done-box" id="donePanel" hidden>
+        <h3>הפרטים נקלטו</h3>
+        <p class="sub" style="margin:8px 0 0">מספר הפנייה שלכם:</p>
+        <div class="ref" id="refNo"></div>
+        <p>המשרד יחזור אליכם לתיאום בדיקה. יש עוד תמונות? שלחו אותן בוואטסאפ עם מספר הרישוי.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px">
+          <a class="btn btn-wa" id="waSend" target="_blank" rel="noopener">שליחת תמונות בוואטסאפ</a>
+          <a class="btn btn-line" id="mailSend">שליחת הפרטים במייל</a>
+        </div>
+        <p class="demo">גרסת הדגמה: הטופס עוד לא מחובר לשרת. בגרסה הסופית הפרטים יגיעו ישירות למערכת של המשרד, ויפתחו תיק לפי מספר הרישוי.</p>
       </div>
     </form>
-
-    <div class="nav-row" id="navRow" style="border-top-color:rgba(255,255,255,.15)">
-      <button type="button" class="btn btn-line" id="prevBtn" style="color:#fff;box-shadow:inset 0 0 0 1.5px #fff">הקודם</button>
-      <span class="saved" id="savedNote" style="color:#c3cfdc"></span>
-      <button type="button" class="btn" id="nextBtn" style="background:var(--brass);color:#fff">הבא</button>
-    </div>
   </div>
 </section>
 
@@ -548,131 +446,57 @@ footer small{color:var(--muted)}
 (() => {
   const OFFICE_WA = "972500000000";               // placeholder - replace with the office number
   const OFFICE_MAIL = "office@example.co.il";       // placeholder
-  const DRAFT_KEY = "ogen-intake-draft";
-
-  // ---------- plate helpers ----------
+  const DRAFT_KEY = "ogen-intake-draft-v2";
+  const $ = id => document.getElementById(id);
   const digits = s => (s || "").replace(/\D/g, "");
-  function fmtPlate(d) {
-    if (d.length === 7) return `${d.slice(0,2)}-${d.slice(2,5)}-${d.slice(5)}`;
-    if (d.length === 8) return `${d.slice(0,3)}-${d.slice(3,5)}-${d.slice(5)}`;
-    return d;
-  }
+  const fmtPlate = d => d.length === 7 ? `${d.slice(0,2)}-${d.slice(2,5)}-${d.slice(5)}` : d.length === 8 ? `${d.slice(0,3)}-${d.slice(3,5)}-${d.slice(5)}` : d;
   const validPlate = s => [7, 8].includes(digits(s).length);
+  const form = $("intakeForm");
 
-  // hero plate
-  const heroPlate = document.getElementById("heroPlate");
-  const heroHint = document.getElementById("heroHint");
+  // ---------- hero plate -> form ----------
+  const heroPlate = $("heroPlate"), heroHint = $("heroHint");
   heroPlate.addEventListener("input", () => {
     const d = digits(heroPlate.value).slice(0, 8);
     heroPlate.value = d.length >= 7 ? fmtPlate(d) : d;
-    heroHint.classList.remove("bad");
-    heroHint.textContent = "7 או 8 ספרות, כמו שמופיע על הלוחית.";
+    heroHint.classList.remove("bad"); heroHint.textContent = "7 או 8 ספרות, כמו שמופיע על הלוחית.";
   });
-  document.getElementById("plateForm").addEventListener("submit", e => {
+  $("plateForm").addEventListener("submit", e => {
     e.preventDefault();
     if (!validPlate(heroPlate.value)) {
-      heroHint.textContent = "מספר רישוי צריך להיות 7 או 8 ספרות.";
-      heroHint.classList.add("bad");
-      heroPlate.focus();
-      return;
+      heroHint.textContent = "מספר רישוי צריך להיות 7 או 8 ספרות."; heroHint.classList.add("bad"); heroPlate.focus(); return;
     }
-    form.plate.value = fmtPlate(digits(heroPlate.value));
-    saveDraft();
-    document.getElementById("intake").scrollIntoView();
-    go(0);
-    setTimeout(() => form.querySelector(".panel.on input, .panel.on textarea")?.focus({preventScroll: true}), 400);
+    form.plate.value = fmtPlate(digits(heroPlate.value)); saveDraft();
+    $("intake").scrollIntoView();
+    setTimeout(() => form.damage_date.focus({preventScroll: true}), 400);
   });
-
-  // ---------- stepper ----------
-  const form = document.getElementById("intakeForm");
-  const panels = [...form.querySelectorAll(".panel")].filter(p => p.id !== "donePanel");
-  const donePanel = document.getElementById("donePanel");
-  const stepper = document.getElementById("stepper");
-  const prevBtn = document.getElementById("prevBtn"), nextBtn = document.getElementById("nextBtn");
-  const navRow = document.getElementById("navRow");
-  let cur = 0;
-  const done = new Set();
-  panels.forEach((p, i) => {
-    const li = document.createElement("li");
-    const b = document.createElement("button");
-    b.type = "button"; b.textContent = p.dataset.title;
-    b.addEventListener("click", () => { if (i <= cur || done.has(i - 1) || done.has(i)) go(i); else tryAdvanceTo(i); });
-    li.appendChild(b); stepper.appendChild(li);
-  });
-  const stepBtns = [...stepper.querySelectorAll("button")];
-
-  function go(i) {
-    cur = i;
-    panels.forEach((p, k) => p.classList.toggle("on", k === i));
-    donePanel.classList.remove("on");
-    stepBtns.forEach((b, k) => {
-      b.toggleAttribute("aria-current", k === i);
-      if (k === i) b.setAttribute("aria-current", "step");
-      b.classList.toggle("done", done.has(k) && k !== i);
-    });
-    prevBtn.style.visibility = i === 0 ? "hidden" : "visible";
-    nextBtn.textContent = i === panels.length - 1 ? "שליחת הפרטים" : "הבא";
-    if (i === panels.length - 1) renderSummary();
-  }
-  function tryAdvanceTo(target) {
-    for (let k = cur; k < target; k++) { if (!validate(k)) { go(k); return; } done.add(k); }
-    go(target);
-  }
 
   // ---------- validation ----------
   function setErr(input, msg) {
-    const f = input.closest(".f");
-    f.classList.toggle("err", !!msg);
-    const m = f.querySelector(".msg");
-    if (m) m.textContent = msg || "";
+    const f = input.closest(".f"); f.classList.toggle("err", !!msg);
+    const m = f.querySelector(".msg"); if (m) m.textContent = msg || "";
     input.setAttribute("aria-invalid", msg ? "true" : "false");
   }
-  function validate(i) {
-    const p = panels[i]; let ok = true, first = null;
-    p.querySelectorAll("input,textarea,select").forEach(el => {
-      if (!el.closest(".f") || el.type === "radio" || el.type === "checkbox" || el.type === "file") return;
-      let msg = "";
-      const v = el.value.trim();
+  function validate() {
+    let first = null;
+    form.querySelectorAll(".f input, .f select").forEach(el => {
+      if (el.type === "file") return;
+      const v = el.value.trim(); let msg = "";
       if (el.required && !v) msg = "שדה חובה";
-      else if (el.name === "plate" && v && !validPlate(v)) msg = "7 או 8 ספרות";
-      else if (el.name === "insured_phone" && v && digits(v).length < 9) msg = "מספר טלפון לא מלא";
-      else if (el.name === "insured_id" && v && !/^\d{5,9}$/.test(v)) msg = "ת.ז. צריכה להכיל עד 9 ספרות";
+      else if (el.name === "plate" && !validPlate(v)) msg = "7 או 8 ספרות";
+      else if (el.name === "insured_phone" && digits(v).length < 9) msg = "מספר טלפון לא מלא";
       else if (el.type === "email" && v && !el.checkValidity()) msg = "כתובת מייל לא תקינה";
       else if (el.type === "date" && v && new Date(v) > new Date()) msg = "התאריך עוד לא הגיע";
-      setErr(el, msg);
-      if (msg) { ok = false; first = first || el; }
+      setErr(el, msg); if (msg && !first) first = el;
     });
-    if (first) first.focus();
-    return ok;
+    if (first) { if (first.closest("details")) first.closest("details").open = true; first.focus(); return false; }
+    if (!$("consent").checked) { $("consentMsg").textContent = "צריך לאשר כדי לשלוח"; $("consent").focus(); return false; }
+    $("consentMsg").textContent = ""; return true;
   }
   form.addEventListener("input", e => { if (e.target.closest(".f.err")) setErr(e.target, ""); });
   form.plate.addEventListener("blur", () => { const d = digits(form.plate.value); if ([7,8].includes(d.length)) form.plate.value = fmtPlate(d); });
 
-  nextBtn.addEventListener("click", () => {
-    if (!validate(cur)) return;
-    done.add(cur);
-    if (cur < panels.length - 1) { go(cur + 1); scrollToForm(); return; }
-    const consent = document.getElementById("consent");
-    if (!consent.checked) { document.getElementById("consentMsg").textContent = "צריך לאשר כדי לשלוח"; consent.focus(); return; }
-    submit();
-  });
-  prevBtn.addEventListener("click", () => { if (cur > 0) { go(cur - 1); scrollToForm(); } });
-  function scrollToForm() { const r = form.getBoundingClientRect(); if (r.top < 0) form.scrollIntoView(); }
-
-  // ---------- third party / copy buttons ----------
-  form.querySelectorAll('input[name="third_party"]').forEach(r => r.addEventListener("change", () => {
-    form.querySelector(".tp").hidden = form.third_party.value !== "כן";
-  }));
-  form.querySelectorAll(".copy").forEach(b => b.addEventListener("click", () => {
-    const who = b.dataset.copy;
-    form[`${who}_name`].value = form.insured_name.value;
-    form[`${who}_phone`].value = form.insured_phone.value;
-    saveDraft();
-  }));
-
   // ---------- damage map ----------
-  const zones = [...document.querySelectorAll(".carmap .zone")];
-  const zonesList = document.getElementById("zonesList");
+  const zones = [...document.querySelectorAll(".carmap .zone")], zonesList = $("zonesList");
   zones.forEach(z => {
     z.setAttribute("tabindex", "0"); z.setAttribute("role", "button");
     z.setAttribute("aria-label", z.dataset.zone); z.setAttribute("aria-pressed", "false");
@@ -688,119 +512,76 @@ footer small{color:var(--muted)}
   }
 
   // ---------- photos (stay in the browser) ----------
-  const files = [];
-  const thumbs = document.getElementById("thumbs"), drop = document.getElementById("drop"), picker = document.getElementById("photos");
-  document.getElementById("pick").addEventListener("click", () => picker.click());
+  const files = [], thumbs = $("thumbs"), drop = $("drop"), picker = $("photos");
+  $("pick").addEventListener("click", () => picker.click());
   picker.addEventListener("change", () => addFiles(picker.files));
   ["dragenter", "dragover"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.add("over"); }));
   ["dragleave", "drop"].forEach(ev => drop.addEventListener(ev, e => { e.preventDefault(); drop.classList.remove("over"); }));
   drop.addEventListener("drop", e => addFiles(e.dataTransfer.files));
   function addFiles(list) {
-    [...list].filter(f => f.type.startsWith("image/")).forEach(f => {
-      if (files.some(x => x.name === f.name && x.size === f.size)) return;
-      files.push(f);
-    });
+    [...list].filter(f => f.type.startsWith("image/")).forEach(f => { if (!files.some(x => x.name === f.name && x.size === f.size)) files.push(f); });
     renderThumbs();
   }
   function renderThumbs() {
     thumbs.innerHTML = "";
     files.forEach((f, i) => {
-      const fig = document.createElement("figure");
-      const img = document.createElement("img"); img.alt = f.name; img.src = URL.createObjectURL(f);
-      const x = document.createElement("button"); x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", `הסרת ${f.name}`);
+      const fig = document.createElement("figure"), img = document.createElement("img"), x = document.createElement("button");
+      img.alt = f.name; img.src = URL.createObjectURL(f);
+      x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", `הסרת ${f.name}`);
       x.addEventListener("click", () => { files.splice(i, 1); renderThumbs(); });
       fig.append(img, x); thumbs.appendChild(fig);
     });
   }
 
-  // ---------- summary ----------
-  const LABELS = {
-    "הפנייה": [["sender_role","מי פונה"],["case_type","סוג התיק"],["damage_date","תאריך האירוע"],["event_place","מקום"],["event_description","מה קרה"],["drivable","הרכב נוסע"]],
-    "הרכב": [["plate","מספר רישוי"],["vehicle_model","יצרן ודגם"],["vehicle_year","שנת ייצור"],["odometer","קילומטראז'"],["_zones","אזורי נזק"],["damage_notes","פירוט"]],
-    "מבוטח": [["insured_name","שם"],["insured_id","ת.ז."],["insured_phone","טלפון"],["insured_email","מייל"],["insured_street","רחוב"],["insured_city","עיר"],["driver_name","נהג"],["driver_phone","טלפון הנהג"],["owner_name","בעל הרכב"],["owner_phone","טלפון בעל הרכב"]],
-    "ביטוח": [["insurer","חברת ביטוח"],["claim_number","מספר תביעה"],["policy_number","מספר פוליסה"],["agent_name","סוכן"],["third_party","רכב נוסף"],["third_party_name","נהג שני"],["third_party_phone","טלפון"],["third_party_plate","רישוי רכב שני"],["third_party_insurer","ביטוח רכב שני"]],
-    "בדיקה": [["garage_name","מוסך"],["inspection_place","מקום הרכב"],["_slots","זמן נוח"],["_photos","תמונות"]],
-  };
+  // ---------- submit (demo) ----------
+  const LABELS = [["plate","מספר רישוי"],["damage_date","תאריך תאונה"],["insured_name","שם"],["insured_phone","טלפון"],
+    ["insurer","חברת ביטוח"],["claim_number","מספר תביעה"],["event_description","מה קרה"],["_zones","אזורי נזק"],
+    ["driver_name","נהג"],["garage_name","מוסך"],["policy_number","מספר פוליסה"],["insured_email","מייל"],
+    ["third_party_plate","רישוי רכב שני"],["third_party_phone","טלפון נהג שני"],["_photos","תמונות"]];
   function data() {
-    const fd = new FormData(form), out = {};
-    for (const [k, v] of fd.entries()) if (k !== "slots") out[k] = v;
+    const out = Object.fromEntries(new FormData(form).entries());
     out._zones = selectedZones().join(", ");
-    out._slots = fd.getAll("slots").join(", ");
     out._photos = files.length ? `${files.length} תמונות` : "";
-    if (out.third_party !== "כן") ["third_party_name","third_party_phone","third_party_plate","third_party_insurer"].forEach(k => delete out[k]);
     return out;
   }
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  function renderSummary() {
-    const d = data(); let html = "<dl>";
-    for (const [group, rows] of Object.entries(LABELS)) {
-      const filled = rows.filter(([k]) => d[k]);
-      if (!filled.length) continue;
-      html += `<h4>${group}</h4>` + filled.map(([k, l]) => `<dt>${l}</dt><dd>${esc(d[k])}</dd>`).join("");
-    }
-    document.getElementById("summary").innerHTML = html + "</dl>";
-  }
-  function asText(d) {
-    // Plain "label: value" lines - the office automation reads this format directly.
-    const lines = ["פתיחת תיק שמאות מהאתר"];
-    for (const [group, rows] of Object.entries(LABELS)) rows.forEach(([k, l]) => { if (d[k]) lines.push(`${l}: ${d[k]}`); });
-    return lines.join("\n");
-  }
-
-  // ---------- submit (demo) ----------
-  function submit() {
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    if (!validate()) return;
     const d = data();
     const ref = `${digits(d.plate)}-${new Date().toISOString().slice(5,10).replace("-", "")}`;
-    document.getElementById("refNo").textContent = ref;
-    const text = asText(d) + `\nמספר פנייה: ${ref}`;
-    document.getElementById("mailSend").href =
-      `mailto:${OFFICE_MAIL}?subject=${encodeURIComponent(`פתיחת תיק - רישוי ${d.plate}`)}&body=${encodeURIComponent(text)}`;
-    document.getElementById("waSend").href =
-      `https://wa.me/${OFFICE_WA}?text=${encodeURIComponent(`רישוי ${d.plate} - תמונות לתיק ${ref}`)}`;
-    panels.forEach(p => p.classList.remove("on"));
-    donePanel.classList.add("on");
-    navRow.hidden = true;
-    stepBtns.forEach(b => { b.classList.add("done"); b.removeAttribute("aria-current"); });
+    // Plain "label: value" lines - the office automation reads this format directly.
+    const text = ["פתיחת תיק שמאות מהאתר", ...LABELS.filter(([k]) => d[k]).map(([k, l]) => `${l}: ${d[k]}`), `מספר פנייה: ${ref}`].join("\n");
+    $("refNo").textContent = ref;
+    $("mailSend").href = `mailto:${OFFICE_MAIL}?subject=${encodeURIComponent(`פתיחת תיק - רישוי ${d.plate}`)}&body=${encodeURIComponent(text)}`;
+    $("waSend").href = `https://wa.me/${OFFICE_WA}?text=${encodeURIComponent(`רישוי ${d.plate} - תמונות לתיק ${ref}`)}`;
+    $("qfBody").hidden = true; $("donePanel").hidden = false;
     try { localStorage.removeItem(DRAFT_KEY); } catch (_) {}
-    donePanel.querySelector("h3").setAttribute("tabindex", "-1");
-    donePanel.querySelector("h3").focus();
-  }
+    const h = $("donePanel").querySelector("h3"); h.setAttribute("tabindex", "-1"); h.focus();
+  });
 
   // ---------- draft in this browser ----------
-  const savedNote = document.getElementById("savedNote");
   let t;
   function saveDraft() {
     clearTimeout(t);
     t = setTimeout(() => {
       try {
-        const d = Object.fromEntries([...new FormData(form).entries()].filter(([k]) => k !== "slots"));
-        d._zones = selectedZones(); d._slots = new FormData(form).getAll("slots");
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
-        savedNote.textContent = "הטיוטה נשמרה בדפדפן";
+        const d = Object.fromEntries(new FormData(form).entries()); d._zones = selectedZones();
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); $("savedNote").textContent = "הטיוטה נשמרה בדפדפן";
       } catch (_) {}
     }, 400);
   }
   form.addEventListener("input", saveDraft);
-  form.addEventListener("change", saveDraft);
   try {
     const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || "null");
     if (d) {
-      for (const [k, v] of Object.entries(d)) {
-        const el = form.elements[k];
-        if (!el || k.startsWith("_")) continue;
-        if (el instanceof RadioNodeList) { [...el].forEach(r => r.checked = r.value === v); } else el.value = v;
-      }
+      for (const [k, v] of Object.entries(d)) { const el = form.elements[k]; if (el && !k.startsWith("_") && el.type !== "file") el.value = v; }
       zones.forEach(z => z.setAttribute("aria-pressed", (d._zones || []).includes(z.dataset.zone) ? "true" : "false"));
-      form.querySelectorAll('input[name="slots"]').forEach(c => c.checked = (d._slots || []).includes(c.value));
-      form.querySelector(".tp").hidden = form.third_party.value !== "כן";
       renderZones();
-      savedNote.textContent = "המשכתם מטיוטה שנשמרה";
     }
   } catch (_) {}
 
-  document.getElementById("fabWa").href = `https://wa.me/${OFFICE_WA}`;
+  $("fabWa").href = `https://wa.me/${OFFICE_WA}`;
   form.damage_date.max = new Date().toISOString().slice(0, 10);
-  go(0);
 })();
 </script>
 </body>
