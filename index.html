@@ -64,7 +64,7 @@ h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.01em}
 .plate{display:flex;direction:ltr;background:var(--plate);border:3px solid var(--plate-edge);border-radius:10px;height:84px;width:min(100%,380px);overflow:hidden;box-shadow:0 2px 0 rgba(16,35,56,.25)}
 .plate .il{width:46px;background:var(--il);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:8px;font:700 13px/1.1 var(--plate-font);gap:4px}
 .plate .il svg{width:22px;height:16px}
-.plate input{flex:1;min-width:0;border:0;background:transparent;font:700 52px/1 var(--plate-font);letter-spacing:.04em;color:#111;text-align:center;padding:0 10px}
+.plate input{flex:1;min-width:0;width:100%;border:0;background:transparent;font:700 52px/1 var(--plate-font);letter-spacing:.04em;color:#111;text-align:center;padding:0 10px}
 .plate input::placeholder{color:rgba(17,17,17,.28)}
 .plate input:focus{outline:none}
 .plate:focus-within{box-shadow:0 0 0 4px rgba(29,79,128,.35)}
@@ -79,7 +79,16 @@ h2{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.01em}
 .steps li::before{content:counter(s);width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 16px/1 var(--plate-font)}
 .steps b{display:block}
 .steps span{color:var(--muted);font-size:15px}
-@media (max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:36px}.hero{padding:40px 0}}
+.hero .wrap>*{min-width:0}
+@media (max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:36px}.hero{padding:40px 0}}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .top .call{display:none}
+  .top .btn-ink{margin-inline-start:auto}
+  .plate{height:72px;width:100%}
+  .plate input{font-size:44px}
+  .plate-row .btn{height:56px;width:100%;justify-content:center}
+}
 
 /* ---------- sections ---------- */
 section.block{padding:72px 0;border-top:1px solid var(--line)}
@@ -222,7 +231,7 @@ footer small{color:var(--muted)}
               <svg viewBox="0 0 22 16"><rect width="22" height="16" fill="#fff"/><rect y="2" width="22" height="2" fill="#1e4fa3"/><rect y="12" width="22" height="2" fill="#1e4fa3"/><path d="M11 5l2.6 4.5h-5.2zM11 11l-2.6-4.5h5.2z" fill="none" stroke="#1e4fa3" stroke-width=".9"/></svg>
               IL
             </div>
-            <input id="heroPlate" inputmode="numeric" autocomplete="off" placeholder="12-345-67" maxlength="10" aria-describedby="heroHint">
+            <input id="heroPlate" size="1" inputmode="numeric" autocomplete="off" placeholder="12-345-67" maxlength="10" aria-describedby="heroHint">
           </div>
           <button class="btn btn-ink" type="submit">המשך לפרטי האירוע</button>
         </div>
